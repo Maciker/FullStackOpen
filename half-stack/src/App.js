@@ -29,20 +29,29 @@ const App = () => {
     );
   };
 
+  const totalExercises = exercises.reduce((total, exercise) => total + exercise.number, 0)
+
+  const Total = (props) => {
+    return (
+      <div>
+        <p>Number of exercises {props.total}</p>
+      </div>
+    );
+  };
+
+  
   return (
     <>
       <Header course={course} />
-      {exercises.map((exercise) =>
-        {
-          return (
-            <Content
+      {exercises.map((exercise) => {
+        return (
+          <Content
             exerciseName={exercise.name}
             exerciseNumber={exercise.number}
           />
-          )
-        }
-      )}
-
+        );
+      })}
+      <Total total={totalExercises} />
     </>
   );
 };
