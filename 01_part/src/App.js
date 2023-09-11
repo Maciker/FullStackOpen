@@ -1,31 +1,20 @@
 import { useState } from "react";
+const App = () => {
+    const [left, setLeft] = useState(0)
+    const [right, setRight] = useState(0)
 
-const Display = ({ counter }) => {
-  return <div>{counter}</div>;
-};
-
-const Button = ( {action, text }) => {
-  return <button onClick={action}>{text}</button>;
-};
-
-const App = (props) => {
-  const [counter, setCounter] = useState(0);
-
-  const increaseByOne = () => {
-    setCounter(counter + 1);
-  };
-
-  const setToZero = () => {
-    setCounter(0);
-  };
-
-  return (
-    <>
-      <Display counter={counter} />
-      <Button action={increaseByOne} text="PLUS" />
-      <Button action={setToZero} text="ZERO" />
-    </>
-  );
-};
+    return(
+        <div>
+            {left}
+            <button onClick={() => setLeft(left + 1)}>
+                LEFT
+            </button>
+            {right}
+            <button onClick={() => setRight(right + 1)}>
+                RIGHT
+            </button>
+        </div>
+    )
+}
 
 export default App;
