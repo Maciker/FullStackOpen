@@ -30,6 +30,10 @@ const FeedbackStatistics = ({feedback}) => {
             <p>Good: {feedback.good}</p>
             <p>Neutral: {feedback.neutral}</p>
             <p>Bad: {feedback.bad}</p>
+            <p>Total Votes: {feedback.totalVotes}</p>
+            <p>Total Points: {feedback.totalPoints}</p>
+            <p>Average: {feedback.average}</p>
+            <p>Positive: {feedback.positive}</p>
         </div>
     )
 }
@@ -38,13 +42,29 @@ const App = () => {
     const [feedback, setFeedback] = useState({
         good: 0,
         neutral: 0,
-        bad: 0
+        bad: 0,
+        totalVotes: 0,
+        totalPoints: 0,
+        average: 0,
+        positive: 0
     })
 
+    const feedbackAverage = (totalPoints, totalVotes) => {
+        console.log(totalPoints)
+        console.log(totalVotes)
+        return totalPoints / totalVotes
+    }
+
     const goodFeedbackClick = () => {
+        const totalVotes = feedback.totalVotes + 1
+        const totalPoints = feedback.totalPoints + 1
+
         return setFeedback({
             ...feedback,
-            good: feedback.good + 1
+            good: feedback.good + 1,
+            totalVotes: totalVotes,
+            totalPoints: totalPoints,
+            average: feedbackAverage(totalPoints, totalVotes)
         })
     }
 
