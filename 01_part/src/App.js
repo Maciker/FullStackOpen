@@ -24,6 +24,16 @@ const FeedbackButton = ({handleClick, buttonText}) => {
     )
 }
 
+const FeedbackStatistics = ({good, neutral, bad}) => {
+    return (
+        <div>
+            <p>Good: {good}</p>
+            <p>Neutral: {neutral}</p>
+            <p>Bad: {bad}</p>
+        </div>
+    )
+}
+
 const App = () => {
     const [good, setGood] = useState(0)
     const [neutral, setNeutral] = useState(0)
@@ -49,9 +59,7 @@ const App = () => {
             <FeedbackButton handleClick={badFeedbackClick} buttonText='BAD' />
             <br/>
             <Subtitle title='Statistics' />
-            <p>Good: {good}</p>
-            <p>Neutral: {neutral}</p>
-            <p>Bad: {bad}</p>
+            <FeedbackStatistics good={good} neutral={neutral} bad={bad} />
         </div>
     )
 }
