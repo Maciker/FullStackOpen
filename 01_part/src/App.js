@@ -25,12 +25,19 @@ const App = () => {
         return setGood(good + 1)
     }
 
+    const neutralFeedbackClick = () => {
+        return setNeutral(neutral + 1)
+    }
+
     return (
         <div>
             <Title title='Give Feedback'/>
             <br/>
             <FeedbackButton handleClick={goodFeedbackClick} buttonText='GOOD' />
-            {good}
+            <p>{good}</p>
+            <br/>
+            <FeedbackButton handleClick={neutralFeedbackClick} buttonText='NEUTRAL' />
+            <p>{neutral}</p>
         </div>
     )
 }
