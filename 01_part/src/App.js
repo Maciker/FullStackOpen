@@ -8,6 +8,14 @@ const Title = ({title}) => {
     )
 }
 
+const Subtitle = ({title}) => {
+    return (
+        <h3>
+            {title}
+        </h3>
+    )
+}
+
 const FeedbackButton = ({handleClick, buttonText}) => {
     return (
         <button onClick={handleClick}>
@@ -29,15 +37,21 @@ const App = () => {
         return setNeutral(neutral + 1)
     }
 
+    const badFeedbackClick = () => {
+        return setBad(bad + 1)
+    }
+
     return (
         <div>
             <Title title='Give Feedback'/>
-            <br/>
             <FeedbackButton handleClick={goodFeedbackClick} buttonText='GOOD' />
-            <p>{good}</p>
-            <br/>
             <FeedbackButton handleClick={neutralFeedbackClick} buttonText='NEUTRAL' />
-            <p>{neutral}</p>
+            <FeedbackButton handleClick={badFeedbackClick} buttonText='BAD' />
+            <br/>
+            <Subtitle title='Statistics' />
+            <p>Good: {good}</p>
+            <p>Neutral: {neutral}</p>
+            <p>Bad: {bad}</p>
         </div>
     )
 }
