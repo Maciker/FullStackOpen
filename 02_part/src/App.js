@@ -1,14 +1,20 @@
-import Note from './components/Note'
-const App = ({notes}) => {
+const App = () => {
 
+    const courses = [
+        {
+            name: 'Half Stack Application development',
+            id: 1,
+            parts: []
+        },
+        {
+            name: 'Node.js',
+            id: 2,
+            parts: []
+        }
+    ]
     return (
         <div>
-            <h1>Notes</h1>
-            <ul>
-                {notes.map(note => <Note key={note.id} note={note}/>)}
-            </ul>
         </div>
     )
 }
-
 export default App
