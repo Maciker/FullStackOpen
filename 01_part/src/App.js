@@ -93,9 +93,16 @@ const App = () => {
     }
 
     const badFeedbackClick = () => {
+        const totalVotes = feedback.totalVotes + 1
+        const totalPoints = feedback.totalPoints - 1
+
         return setFeedback({
             ...feedback,
-            bad: feedback.bad + 1
+            bad: feedback.bad + 1,
+            totalVotes: totalVotes,
+            totalPoints: totalPoints,
+            average: feedbackAverage(totalPoints, totalVotes),
+            positive: positiveAverage(feedback.good, totalVotes)
         })
     }
 
