@@ -60,20 +60,22 @@ const App = () => {
         return (totalPoints / totalVotes) * 100
     }
 
-    const positiveAverage = (totalPositive, totalNegative) => {
-        return (totalPositive / totalNegative) * 100
+    const positiveAverage = (totalPositive, totalVotes) => {
+        return (totalPositive / totalVotes) * 100
     }
 
     const goodFeedbackClick = () => {
         const totalVotes = feedback.totalVotes + 1
         const totalPoints = feedback.totalPoints + 1
+        const totalPositive = feedback.good + 1
 
         return setFeedback({
             ...feedback,
-            good: feedback.good + 1,
+            good: totalPositive,
             totalVotes: totalVotes,
             totalPoints: totalPoints,
-            average: feedbackAverage(totalPoints, totalVotes)
+            average: feedbackAverage(totalPoints, totalVotes),
+            positive: positiveAverage(totalPositive, totalVotes)
         })
     }
 
