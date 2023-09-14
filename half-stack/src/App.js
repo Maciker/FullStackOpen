@@ -44,6 +44,12 @@ const App = () => {
   const Header = ({name}) => {
     return <h2>{name}</h2>
   }
+
+  const Content = ({parts}) => {
+    return (
+        <p>{parts.name}</p>
+    )
+  }
   /*const Header = (props) => {
     return <h1>{props.course}</h1>;
   };
