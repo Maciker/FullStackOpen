@@ -1,5 +1,5 @@
 const App = () => {
-  const course = [{
+  const courses = [{
     id: 1,
     name: 'Half Stack application development',
     parts: [
@@ -37,6 +37,13 @@ const App = () => {
     ]
   }]
 
+  const Course = ({course}) => {
+    return <Header name={course.name} />
+  }
+
+  const Header = ({name}) => {
+    return <h2>{name}</h2>
+  }
   /*const Header = (props) => {
     return <h1>{props.course}</h1>;
   };
@@ -63,7 +70,13 @@ const App = () => {
 
   
   return (
-      <div>Exercises 2.1 --2.5</div>
+      <>
+        <div>Exercises 2.1 --2.5</div>
+        <div>
+          {courses.map(course => <Course course={course}/>)}
+        </div>
+
+      </>
 /*    <>
       <Header course={course} />
       {exercises.map((exercise) => {
