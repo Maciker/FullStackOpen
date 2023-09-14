@@ -15,7 +15,7 @@ const notes = [
         important: false
     },
     {
-        id: 1,
+        id: 3,
         content: 'Learn Node',
         important: true
     }
