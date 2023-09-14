@@ -25,6 +25,13 @@ const FeedbackButton = ({handleClick, buttonText}) => {
 }
 
 const FeedbackStatistics = ({feedback}) => {
+    if (feedback.totalVotes === 0) {
+        return (
+            <div>
+                <p>Vote and show th statistics</p>
+            </div>
+        )
+    }
     return (
         <div>
             <p>Good: {feedback.good}</p>
@@ -32,8 +39,8 @@ const FeedbackStatistics = ({feedback}) => {
             <p>Bad: {feedback.bad}</p>
             <p>Total Votes: {feedback.totalVotes}</p>
             <p>Total Points: {feedback.totalPoints}</p>
-            <p>Average: {feedback.average}</p>
-            <p>Positive: {feedback.positive}</p>
+            <p>Average: {feedback.average} %</p>
+            <p>Positive: {feedback.positive} %</p>
         </div>
     )
 }
@@ -50,9 +57,11 @@ const App = () => {
     })
 
     const feedbackAverage = (totalPoints, totalVotes) => {
-        console.log(totalPoints)
-        console.log(totalVotes)
-        return totalPoints / totalVotes
+        return (totalPoints / totalVotes) * 100
+    }
+
+    const positiveAverage = (totalPositive, totalNegative) => {
+        return (totalPositive / totalNegative) * 100
     }
 
     const goodFeedbackClick = () => {
