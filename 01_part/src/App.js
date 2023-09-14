@@ -80,9 +80,15 @@ const App = () => {
     }
 
     const neutralFeedbackClick = () => {
+        const totalVotes = feedback.totalVotes + 1
+
         return setFeedback({
             ...feedback,
-            neutral: feedback.neutral  + 1
+            neutral: feedback.neutral  + 1,
+            totalVotes: totalVotes,
+            average: feedbackAverage(feedback.totalPoints, totalVotes),
+            positive: positiveAverage(feedback.good, totalVotes)
+
         })
     }
 
