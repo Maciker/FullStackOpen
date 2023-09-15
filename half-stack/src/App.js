@@ -42,7 +42,7 @@ const App = () => {
     return <>
       <Header name={course.name} />
       {course.parts.map(part => <Content part={part}/>)}
-      {totalExercises}
+      <ExercisesByCourse totalEXercises={totalExercises} />
       </>
   }
 
@@ -54,6 +54,10 @@ const App = () => {
     return (
         <p>{part.name}: {part.exercises}</p>
     )
+  }
+
+  const ExercisesByCourse = ({totalEXercises}) => {
+    return <p>Total of {totalEXercises} exercises</p>
   }
   /*const Header = (props) => {
     return <h1>{props.course}</h1>;
