@@ -38,16 +38,19 @@ const App = () => {
   }]
 
   const Course = ({course}) => {
-    return <Header name={course.name} />
+    return <>
+      <Header name={course.name} />
+      {course.parts.map(part => <Content part={part}/>)}
+      </>
   }
 
   const Header = ({name}) => {
     return <h2>{name}</h2>
   }
 
-  const Content = ({parts}) => {
+  const Content = ({part}) => {
     return (
-        <p>{parts.name}</p>
+        <p>{part.name}: {part.exercises}</p>
     )
   }
   /*const Header = (props) => {
