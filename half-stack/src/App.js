@@ -1,6 +1,7 @@
 import Course from './components/Course'
+import {useState} from "react";
 const App = () => {
-  const courses = [{
+  const [courses, setCourses] = useState([{
     id: 1,
     name: 'Half Stack application development',
     parts: [
@@ -36,13 +37,13 @@ const App = () => {
         id: 2
       }
     ]
-  }]
+  }])
 
   return (
       <>
         <div>Exercises 2.1 --2.5</div>
         <div>
-          {courses.map(course => <Course course={course}/>)}
+          {courses.map(course => <Course course={course} key={course.id}/>)}
         </div>
 
       </>
