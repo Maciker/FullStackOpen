@@ -1,3 +1,4 @@
+import Course from './components/Course'
 const App = () => {
   const courses = [{
     id: 1,
@@ -37,53 +38,6 @@ const App = () => {
     ]
   }]
 
-  const Course = ({course}) => {
-    const totalExercises = course.parts.reduce((total, part) => total + part.exercises, 0)
-    return <>
-      <Header name={course.name} />
-      {course.parts.map(part => <Content part={part}/>)}
-      <ExercisesByCourse totalEXercises={totalExercises} />
-      </>
-  }
-
-  const Header = ({name}) => {
-    return <h2>{name}</h2>
-  }
-
-  const Content = ({part}) => {
-    return (
-        <p>{part.name}: {part.exercises}</p>
-    )
-  }
-
-  const ExercisesByCourse = ({totalEXercises}) => {
-    return <p>Total of {totalEXercises} exercises</p>
-  }
-  /*const Header = (props) => {
-    return <h1>{props.course}</h1>;
-  };
-
-  const Content = (props) => {
-    return (
-      <div>
-        <p>
-          {props.exerciseName} {props.exerciseNumber}
-        </p>
-      </div>
-    );
-  };
-
-  const totalExercises = exercises.reduce((total, exercise) => total + exercise.number, 0)
-
-  const Total = (props) => {
-    return (
-      <div>
-        <p>Number of exercises {props.total}</p>
-      </div>
-    );
-  };*/
-
-  
   return (
       <>
         <div>Exercises 2.1 --2.5</div>
@@ -92,18 +46,6 @@ const App = () => {
         </div>
 
       </>
-/*    <>
-      <Header course={course} />
-      {exercises.map((exercise) => {
-        return (
-          <Content
-            exerciseName={exercise.name}
-            exerciseNumber={exercise.number}
-          />
-        );
-      })}
-      <Total total={totalExercises} />
-    </>*/
   );
 };
 
