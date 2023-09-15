@@ -1,5 +1,6 @@
 import Header from './Header'
 import Content from './Content'
+import ExercisesByCourse from './ExercisesByCourse'
 const Course = ({course}) => {
     const totalExercises = course.parts.reduce((total, part) => total + part.exercises, 0)
     return <>
@@ -8,9 +9,4 @@ const Course = ({course}) => {
         <ExercisesByCourse totalExercises={totalExercises} />
     </>
 }
-
-const ExercisesByCourse = ({totalExercises}) => {
-    return <p>Total of {totalExercises} exercises</p>
-}
-
 export default Course
