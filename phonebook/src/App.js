@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Person from "./components/Person";
+import SectionHeader from "./components/SectionHeader";
 
 const App = () => {
     const [persons, setPersons] = useState([{id: 1, name: 'Arto Hellas', number: 123456789}])
@@ -8,7 +9,7 @@ const App = () => {
 
     return(
         <div>
-            <h2>PhoneBook</h2>
+            <SectionHeader title='PhoneBook' />
             <form>
                 <div>
                     name: <input />
@@ -20,7 +21,7 @@ const App = () => {
                     </button>
                 </div>
             </form>
-            <h2>Numbers</h2>
+            <SectionHeader title='Numbers' />
             <ul>
                 {persons.map(person => <Person person={person} key={person.id}/>)}
             </ul>
