@@ -38,10 +38,16 @@ const App = () => {
       }
     ]
   }])
+  const [newCourse, setNewCourse] = useState('a new course')
 
   const addCourse = (event) => {
     event.preventDefault()
     console.log('button clicked', event.target)
+  }
+
+  const handleCourseChange = (event) => {
+    console.log(event.target.value)
+    setNewCourse(event.target.value)
   }
 
   return (
@@ -51,7 +57,7 @@ const App = () => {
           {courses.map(course => <Course course={course} key={course.id}/>)}
         </div>
         <form onSubmit={addCourse}>
-          <input />
+          <input value={newCourse} onChange={handleCourseChange}/>
           <button type="submit">SAVE COURSE</button>
         </form>
 
