@@ -39,12 +39,21 @@ const App = () => {
     ]
   }])
 
+  const addCourse = (event) => {
+    event.preventDefault()
+    console.log('button clicked', event.target)
+  }
+
   return (
       <>
-        <div>Exercises 2.1 --2.5</div>
+        <div>Exercises 2.1 --2.5 and 2B part: Forms</div>
         <div>
           {courses.map(course => <Course course={course} key={course.id}/>)}
         </div>
+        <form onSubmit={addCourse}>
+          <input />
+          <button type="submit">SAVE COURSE</button>
+        </form>
 
       </>
   );
