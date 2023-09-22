@@ -42,7 +42,14 @@ const App = () => {
 
   const addCourse = (event) => {
     event.preventDefault()
-    console.log('button clicked', event.target)
+    const courseObject = {
+      id: courses.length + 1,
+      name: newCourse,
+      parts: []
+    }
+
+    setCourses(courses.concat(courseObject))
+    setNewCourse('')
   }
 
   const handleCourseChange = (event) => {
