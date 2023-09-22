@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 const App = () => {
-    const [persons, setPersons] = useState([{name: 'Arto Hellas'}])
+    const [persons, setPersons] = useState([{name: 'Arto Hellas', number: 123456789}])
 
     const [newName, setNewName] = useState('')
 
@@ -11,6 +11,7 @@ const App = () => {
             <form>
                 <div>
                     name: <input />
+                    number: <input />
                 </div>
                 <div>
                     <button type='submit'>
@@ -19,6 +20,9 @@ const App = () => {
                 </div>
             </form>
             <h2>Numbers</h2>
+            <ul>
+                <li>{persons.map(person => person.name + ' --- ' +person.number)}</li>
+            </ul>
         </div>
     )
 }
