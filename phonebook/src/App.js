@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Person from "./components/Person";
 import SectionHeader from "./components/SectionHeader";
+import PhoneForm from "./components/PhoneForm";
 
 const App = () => {
     const [persons, setPersons] = useState([{id: 1, name: 'Arto Hellas', number: 123456789}])
@@ -29,27 +30,16 @@ const App = () => {
 
     const handlePersonChange = (event) => {
         const { name, value } = event.target;
-
+        console.log(event.target)
         setNewPerson({
             ...newPerson,
             [name]: value,
         });
     }
-
     return(
         <div>
             <SectionHeader title='PhoneBook' />
-            <form onSubmit={addPerson}>
-                <div>
-                    name: <input value={newPerson.name} onChange={handlePersonChange} name='name'/>
-                    number: <input value={newPerson.number} onChange={handlePersonChange} name='number'/>
-                </div>
-                <div>
-                    <button type='submit'>
-                        ADD
-                    </button>
-                </div>
-            </form>
+            <PhoneForm addPerson={addPerson} newPerson={newPerson} handlePersonChange={handlePersonChange}/>
             <SectionHeader title='Numbers' />
             <ul>
                 {persons.map(person => <Person person={person} key={person.id}/>)}
