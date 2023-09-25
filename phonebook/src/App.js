@@ -27,13 +27,22 @@ const App = () => {
         )
     }
 
+    const handlePersonChange = (event) => {
+        const { name, value } = event.target;
+
+        setNewPerson({
+            ...newPerson,
+            [name]: value,
+        });
+    }
+
     return(
         <div>
             <SectionHeader title='PhoneBook' />
-            <form>
+            <form onSubmit={addPerson}>
                 <div>
-                    name: <input />
-                    number: <input />
+                    name: <input value={newPerson.name} onChange={handlePersonChange} name='name'/>
+                    number: <input value={newPerson.number} onChange={handlePersonChange} name='number'/>
                 </div>
                 <div>
                     <button type='submit'>
