@@ -2,7 +2,8 @@ import axios from "axios";
 const baseUrl = 'http://localhost:3001/courses'
 
 const getAllCourses = () => {
-    return axios.get(baseUrl)
+    const coursesRequest= axios.get(baseUrl)
+    return coursesRequest.then(response => response.data)
 }
 
 const createCourse = newCourse => {

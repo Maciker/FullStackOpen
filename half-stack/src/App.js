@@ -8,8 +8,7 @@ const App = () => {
   const [showAll, setShowAll] = useState(true)
 
   useEffect(() => {
-      courseService.getAllCourses().then(response => setCourses(response.data))
-      }, [])
+      courseService.getAllCourses().then(initialCourses => setCourses(initialCourses))}, [])
 
   const coursesToShow = showAll
       ? courses
