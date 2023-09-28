@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Half Stack application development",
-      "finished": false,
+      "finished": true,
       "parts": [
         {
           "name": "Fundamentals of React",

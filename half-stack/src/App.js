@@ -39,6 +39,16 @@ const App = () => {
     setNewCourse(event.target.value)
   }
 
+  const toggleFinished = (id) => {
+      const courseUrl = `http://localhost:3001/courses/${id}`
+      const singleCourse = courses.find(course => course.id === id )
+      const changedCourse = { ...singleCourse, finished: !singleCourse.finished }
+
+      axios.put(courseUrl, changedCourse).then(response => {
+          setCourses(courses.map(course => course.id !== id ? course :response.data))
+      })
+  }
+
   return (
       <>
         <div>Exercises 2.1 --2.5 and 2B part: Forms</div>
@@ -48,7 +58,7 @@ const App = () => {
           </button>
         </div>
         <div>
-          {coursesToShow.map(course => <Course course={course} key={course.id}/>)}
+          {coursesToShow.map(course => <Course course={course} key={course.id} toggleFinished={() => toggleFinished(course.id)}/>)}
         </div>
         <form onSubmit={addCourse}>
           <input value={newCourse} onChange={handleCourseChange}/>
