@@ -7,7 +7,8 @@ const getAllCourses = () => {
 }
 
 const createCourse = newCourse => {
-    return axios.post(baseUrl, newCourse)
+    const createCourseRequest = axios.post(baseUrl, newCourse)
+    return createCourseRequest.then(response => response.data)
 }
 
 const updateCourse = (id, updatedCourse) => {

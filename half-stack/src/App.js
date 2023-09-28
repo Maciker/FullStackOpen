@@ -22,8 +22,8 @@ const App = () => {
       parts: []
     }
 
-    courseService.createCourse(courseObject).then(response => {
-        setCourses(courses.concat(response.data))
+    courseService.createCourse(courseObject).then(createdCourse => {
+        setCourses(courses.concat(createdCourse))
         setNewCourse('')
     })
   }
