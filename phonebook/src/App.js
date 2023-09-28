@@ -1,10 +1,17 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Person from "./components/Person";
 import SectionHeader from "./components/SectionHeader";
 import PhoneForm from "./components/PhoneForm";
+import axios from "axios";
 
 const App = () => {
-    const [persons, setPersons] = useState([{id: 1, name: 'Arto Hellas', number: 123456789}])
+    const [persons, setPersons] = useState([])
+
+    const fetchPersons = () => {
+        axios.get('http://localhost:3001/persons').then( response => setPersons(response.data))
+    }
+
+    useEffect(fetchPersons, [])
 
     const [newPerson, setNewPerson] = useState({
         id: 999,
