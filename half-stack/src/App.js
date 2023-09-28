@@ -1,17 +1,15 @@
 import Course from './components/Course'
 import {useState, useEffect} from "react";
-import axios from "axios";
+import courseService from './services/courses'
+
 const App = () => {
   const [courses, setCourses] = useState([])
   const [newCourse, setNewCourse] = useState('a new course')
   const [showAll, setShowAll] = useState(true)
-  const coursesUrl = 'http://localhost:3001/courses'
 
-  const fetchCourses = () => {
-      axios.get(coursesUrl).then( response => setCourses(response.data))
-  }
-
-  useEffect(fetchCourses, [])
+  useEffect(() => {
+      courseService.getAllCourses().then(response => setCourses(response.data))
+      }, [])
 
   const coursesToShow = showAll
       ? courses
@@ -25,13 +23,10 @@ const App = () => {
       parts: []
     }
 
-    axios.post(coursesUrl, courseObject).then( response => {
+    courseService.createCourse(courseObject).then(response => {
         setCourses(courses.concat(response.data))
         setNewCourse('')
-        }
-
-    )
-    setNewCourse('')
+    })
   }
 
   const handleCourseChange = (event) => {
@@ -40,11 +35,10 @@ const App = () => {
   }
 
   const toggleFinished = (id) => {
-      const courseUrl = `http://localhost:3001/courses/${id}`
       const singleCourse = courses.find(course => course.id === id )
       const changedCourse = { ...singleCourse, finished: !singleCourse.finished }
 
-      axios.put(courseUrl, changedCourse).then(response => {
+      courseService.updateCourse(id, changedCourse).then(response => {
           setCourses(courses.map(course => course.id !== id ? course :response.data))
       })
   }
