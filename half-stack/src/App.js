@@ -5,9 +5,10 @@ const App = () => {
   const [courses, setCourses] = useState([])
   const [newCourse, setNewCourse] = useState('a new course')
   const [showAll, setShowAll] = useState(true)
+  const coursesUrl = 'http://localhost:3001/courses'
 
   const fetchCourses = () => {
-      axios.get('http://localhost:3001/courses').then( response => setCourses(response.data))
+      axios.get(coursesUrl).then( response => setCourses(response.data))
   }
 
   useEffect(fetchCourses, [])
@@ -19,12 +20,16 @@ const App = () => {
   const addCourse = (event) => {
     event.preventDefault()
     const courseObject = {
-      id: courses.length + 1,
       name: newCourse,
       parts: []
     }
 
-    setCourses(courses.concat(courseObject))
+    axios.post(coursesUrl, courseObject).then( response => {
+        setCourses(courses.concat(response.data))
+        setNewCourse('')
+        }
+
+    )
     setNewCourse('')
   }
 
