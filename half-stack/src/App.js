@@ -1,45 +1,14 @@
 import Course from './components/Course'
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import axios from "axios";
 const App = () => {
-  const [courses, setCourses] = useState([{
-    id: 1,
-    name: 'Half Stack application development',
-    parts: [
-      {
-        name: 'Fundamentals of React',
-        exercises: 10,
-        id: 1
-      },
-      {
-        name: 'Using props to pass data',
-        exercises: 7,
-        id: 2
-      },
-      {
-        name: 'State of a component',
-        exercises: 14,
-        id: 3
-      }
-    ]
-  },
-  {
-    name: 'Node.js',
-    id: 2,
-    parts: [
-      {
-        name: 'Routing',
-        exercises: 3,
-        id: 1
-      },
-      {
-        name: 'Middlewares',
-        exercises: 7,
-        id: 2
-      }
-    ]
-  }])
+  const [courses, setCourses] = useState([])
   const [newCourse, setNewCourse] = useState('a new course')
   const [showAll, setShowAll] = useState(true)
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/courses').then( response => setCourses(response.data))
+  })
 
   const coursesToShow = showAll
       ? courses
