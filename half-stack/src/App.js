@@ -6,9 +6,11 @@ const App = () => {
   const [newCourse, setNewCourse] = useState('a new course')
   const [showAll, setShowAll] = useState(true)
 
-  useEffect(() => {
-    axios.get('http://localhost:3001/courses').then( response => setCourses(response.data))
-  })
+  const fetchCourses = () => {
+      axios.get('http://localhost:3001/courses').then( response => setCourses(response.data))
+  }
+
+  useEffect(fetchCourses, [])
 
   const coursesToShow = showAll
       ? courses
