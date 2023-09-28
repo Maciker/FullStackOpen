@@ -21,6 +21,7 @@ const App = () => {
     event.preventDefault()
     const courseObject = {
       name: newCourse,
+      finished: false,
       parts: []
     }
 
