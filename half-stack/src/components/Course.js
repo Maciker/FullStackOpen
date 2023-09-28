@@ -7,6 +7,7 @@ const Course = ({course}) => {
         <Header name={course.name} />
         {course.parts.map(part => <Content part={part} key={part.id}/>)}
         <ExercisesByCourse totalExercises={totalExercises} />
+        <p>{course.finished ? 'Course Finished' : 'Course Not Finished'}</p>
     </>
 }
 export default Course
