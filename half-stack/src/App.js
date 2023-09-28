@@ -37,8 +37,8 @@ const App = () => {
       const singleCourse = courses.find(course => course.id === id )
       const changedCourse = { ...singleCourse, finished: !singleCourse.finished }
 
-      courseService.updateCourse(id, changedCourse).then(response => {
-          setCourses(courses.map(course => course.id !== id ? course :response.data))
+      courseService.updateCourse(id, changedCourse).then(updatedCourse => {
+          setCourses(courses.map(course => course.id !== id ? course : updatedCourse))
       })
   }
 

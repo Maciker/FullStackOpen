@@ -12,7 +12,8 @@ const createCourse = newCourse => {
 }
 
 const updateCourse = (id, updatedCourse) => {
-    return axios.put(`${baseUrl}/${id}`, updatedCourse)
+    const updateCourseRequest = axios.put(`${baseUrl}/${id}`, updatedCourse)
+    return updateCourseRequest.then(response => response.data)
 }
 
 export default {
