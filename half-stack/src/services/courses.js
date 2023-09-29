@@ -17,7 +17,7 @@ const updateCourse = (id, updatedCourse) => {
 }
 
 export default {
-    getAllCourses: getAllCourses,
-    createCourse: createCourse,
-    updateCourse: updateCourse
+    getAllCourses,
+    createCourse,
+    updateCourse
 }
