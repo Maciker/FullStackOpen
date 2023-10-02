@@ -1,9 +1,11 @@
+import {Button, ListItem, Stack} from "@chakra-ui/react";
+
 const Person = ({person, deletePerson}) => {
     return (
-        <div>
-            <li>{person.name + ' --- ' +person.number}</li>
-            <button onClick={deletePerson}>DELETE</button>
-        </div>
+        <Stack>
+            <ListItem>{person.name + ' --- ' +person.number}</ListItem>
+            <Button onClick={deletePerson}>DELETE</Button>
+        </Stack>
     )
 }
 

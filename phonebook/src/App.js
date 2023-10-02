@@ -3,6 +3,7 @@ import Person from "./components/Person";
 import SectionHeader from "./components/SectionHeader";
 import PhoneForm from "./components/PhoneForm";
 import personsService from "./services/persons"
+import {ChakraProvider, Container, UnorderedList} from '@chakra-ui/react'
 
 const App = () => {
     const [persons, setPersons] = useState([])
@@ -62,14 +63,18 @@ const App = () => {
 
     }
     return(
-        <div>
-            <SectionHeader title='PhoneBook' />
-            <PhoneForm addPerson={addPerson} newPerson={newPerson} handlePersonChange={handlePersonChange}/>
-            <SectionHeader title='Numbers' />
-            <ul>
-                {persons.map(person => <Person person={person} key={person.id} deletePerson={() =>deletePerson(person)}/>)}
-            </ul>
-        </div>
+        <ChakraProvider>
+            <Container mt={10}>
+                <SectionHeader title='PhoneBook' />
+                <PhoneForm addPerson={addPerson} newPerson={newPerson} handlePersonChange={handlePersonChange}/>
+            </Container>
+            <Container mt={10}>
+                <SectionHeader title='Numbers' />
+                <UnorderedList>
+                    {persons.map(person => <Person person={person} key={person.id} deletePerson={() =>deletePerson(person)}/>)}
+                </UnorderedList>
+            </Container>
+        </ChakraProvider>
     )
 }
 

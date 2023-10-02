@@ -1,5 +1,7 @@
+import {Heading} from "@chakra-ui/react";
+
 const SectionHeader = ({title}) => {
-    return <h2>{title}</h2>
+    return <Heading>{title}</Heading>
 }
 
 export default SectionHeader
