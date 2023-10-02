@@ -1,10 +1,15 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Person from "./components/Person";
 import SectionHeader from "./components/SectionHeader";
 import PhoneForm from "./components/PhoneForm";
+import personsService from "./services/persons"
+import {ChakraProvider, Container, UnorderedList} from '@chakra-ui/react'
 
 const App = () => {
-    const [persons, setPersons] = useState([{id: 1, name: 'Arto Hellas', number: 123456789}])
+    const [persons, setPersons] = useState([])
+
+    useEffect(() => {
+        personsService.getAllPersons().then(initialPersons => setPersons(initialPersons))}, [])
 
     const [newPerson, setNewPerson] = useState({
         id: 999,
@@ -14,18 +19,30 @@ const App = () => {
 
     const addPerson = (event) => {
         event.preventDefault()
-        const addedPerson = {
-            id: persons.length + 1,
-            name: newPerson.name,
-            number: newPerson.number
-        }
+        const isPersonOnTheList = persons.find(person => person.name === newPerson.name)
+        if (isPersonOnTheList) {
+            if (window.confirm(`${newPerson.name} is on the list. Do you want to update the phone number?`)) {
+                const updatedNumber = {
+                    ...isPersonOnTheList,
+                    number: newPerson.number
+                }
 
-        setPersons(persons.concat(addedPerson))
-        setNewPerson({
-            id: 999,
-            name: '',
-            number: 999999999}
-        )
+                personsService.updatePerson(isPersonOnTheList.id, updatedNumber).then(updatedPerson => {
+                    setPersons(persons.map(person => person.id !== isPersonOnTheList.id ? person : updatedPerson))
+                })
+            }
+        } else {
+            const addedPerson = {
+                id: persons.length + 1,
+                name: newPerson.name,
+                number: newPerson.number
+            }
+
+            personsService.createPerson(addedPerson).then(addedPerson  => {
+                setPersons(persons.concat(addedPerson))
+                setNewPerson('')
+            })
+        }
     }
 
     const handlePersonChange = (event) => {
@@ -36,15 +53,28 @@ const App = () => {
             [name]: value,
         });
     }
+
+    const deletePerson = (deletedPerson) => {
+        if(window.confirm(`Your are going to delete person ${deletedPerson.name} Are you sure?`)) {
+            personsService.deletePerson(deletedPerson.id).then(() => {
+                setPersons(persons.filter(person => person.id !== deletedPerson.id))
+            })
+        }
+
+    }
     return(
-        <div>
-            <SectionHeader title='PhoneBook' />
-            <PhoneForm addPerson={addPerson} newPerson={newPerson} handlePersonChange={handlePersonChange}/>
-            <SectionHeader title='Numbers' />
-            <ul>
-                {persons.map(person => <Person person={person} key={person.id}/>)}
-            </ul>
-        </div>
+        <ChakraProvider>
+            <Container mt={10}>
+                <SectionHeader title='PhoneBook' />
+                <PhoneForm addPerson={addPerson} newPerson={newPerson} handlePersonChange={handlePersonChange}/>
+            </Container>
+            <Container mt={10}>
+                <SectionHeader title='Numbers' />
+                <UnorderedList>
+                    {persons.map(person => <Person person={person} key={person.id} deletePerson={() =>deletePerson(person)}/>)}
+                </UnorderedList>
+            </Container>
+        </ChakraProvider>
     )
 }
 
