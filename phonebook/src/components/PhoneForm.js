@@ -1,4 +1,5 @@
 import {Button, Input, Stack} from "@chakra-ui/react";
+import { AddIcon } from '@chakra-ui/icons'
 
 const PhoneForm = ({addPerson, newPerson, handlePersonChange}) => {
 
@@ -9,7 +10,7 @@ const PhoneForm = ({addPerson, newPerson, handlePersonChange}) => {
                 name: <Input value={newPerson.name} onChange={handlePersonChange} name='name'/>
                 number: <Input value={newPerson.number} onChange={handlePersonChange} name='number'/>
                 <Button colorScheme="purple" type='submit'>
-                    ADD
+                    <AddIcon />
                 </Button>
             </Stack>
         </form>
