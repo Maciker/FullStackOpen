@@ -24,12 +24,10 @@ const App = () => {
             number: newPerson.number
         }
 
-        setPersons(persons.concat(addedPerson))
-        setNewPerson({
-            id: 999,
-            name: '',
-            number: 999999999}
-        )
+        personsService.createPerson(addedPerson).then(addedPerson  => {
+            setPersons(persons.concat(addedPerson))
+            setNewPerson('')
+        })
     }
 
     const handlePersonChange = (event) => {
