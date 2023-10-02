@@ -38,13 +38,17 @@ const App = () => {
             [name]: value,
         });
     }
+
+    const deletePerson = (id) => {
+        console.log('Delete person, ' + id)
+    }
     return(
         <div>
             <SectionHeader title='PhoneBook' />
             <PhoneForm addPerson={addPerson} newPerson={newPerson} handlePersonChange={handlePersonChange}/>
             <SectionHeader title='Numbers' />
             <ul>
-                {persons.map(person => <Person person={person} key={person.id}/>)}
+                {persons.map(person => <Person person={person} key={person.id} deletePerson={() =>deletePerson(person.id)}/>)}
             </ul>
         </div>
     )
