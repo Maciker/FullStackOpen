@@ -18,16 +18,30 @@ const App = () => {
 
     const addPerson = (event) => {
         event.preventDefault()
-        const addedPerson = {
-            id: persons.length + 1,
-            name: newPerson.name,
-            number: newPerson.number
-        }
+        const isPersonOnTheList = persons.find(person => person.name === newPerson.name)
+        if (isPersonOnTheList) {
+            if (window.confirm(`${newPerson.name} is on the list. Do you want to update the phone number?`)) {
+                const updatedNumber = {
+                    ...isPersonOnTheList,
+                    number: newPerson.number
+                }
 
-        personsService.createPerson(addedPerson).then(addedPerson  => {
-            setPersons(persons.concat(addedPerson))
-            setNewPerson('')
-        })
+                personsService.updatePerson(isPersonOnTheList.id, updatedNumber).then(updatedPerson => {
+                    setPersons(persons.map(person => person.id !== isPersonOnTheList.id ? person : updatedPerson))
+                })
+            }
+        } else {
+            const addedPerson = {
+                id: persons.length + 1,
+                name: newPerson.name,
+                number: newPerson.number
+            }
+
+            personsService.createPerson(addedPerson).then(addedPerson  => {
+                setPersons(persons.concat(addedPerson))
+                setNewPerson('')
+            })
+        }
     }
 
     const handlePersonChange = (event) => {
@@ -39,8 +53,13 @@ const App = () => {
         });
     }
 
-    const deletePerson = (id) => {
-        console.log('Delete person, ' + id)
+    const deletePerson = (deletedPerson) => {
+        if(window.confirm(`Your are going to delete person ${deletedPerson.name} Are you sure?`)) {
+            personsService.deletePerson(deletedPerson.id).then(() => {
+                setPersons(persons.filter(person => person.id !== deletedPerson.id))
+            })
+        }
+
     }
     return(
         <div>
@@ -48,7 +67,7 @@ const App = () => {
             <PhoneForm addPerson={addPerson} newPerson={newPerson} handlePersonChange={handlePersonChange}/>
             <SectionHeader title='Numbers' />
             <ul>
-                {persons.map(person => <Person person={person} key={person.id} deletePerson={() =>deletePerson(person.id)}/>)}
+                {persons.map(person => <Person person={person} key={person.id} deletePerson={() =>deletePerson(person)}/>)}
             </ul>
         </div>
     )
