@@ -8,7 +8,7 @@ const PhoneForm = ({addPerson, newPerson, handlePersonChange}) => {
             <Stack>
                 name: <Input value={newPerson.name} onChange={handlePersonChange} name='name'/>
                 number: <Input value={newPerson.number} onChange={handlePersonChange} name='number'/>
-                <Button type='submit'>
+                <Button colorScheme="purple" type='submit'>
                     ADD
                 </Button>
             </Stack>
