@@ -1,3 +1,4 @@
+import './CourseCompletion.css'
 const CourseCompletion = ({labelFinished, toggleFinished, courseFinished}) => {
     return (
         <div>
