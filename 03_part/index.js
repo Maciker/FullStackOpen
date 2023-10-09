@@ -57,7 +57,11 @@ app.get('/api/courses', (resquest, response) => {
 app.get('/api/courses/:id', (request, response) => {
     const id = Number(request.params.id)
     const course = courses.find( note => note.id === id)
-    response.json(course)
+    if (course) {
+        response.json(course)
+    } else {
+        response.status(404).end()
+    }
 })
 
 const PORT = 3001
