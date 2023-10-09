@@ -54,6 +54,12 @@ app.get('/api/courses', (resquest, response) => {
     response.json(courses)
 })
 
+app.get('/api/courses/:id', (request, response) => {
+    const id = Number(request.params.id)
+    const course = courses.find( note => note.id === id)
+    response.json(course)
+})
+
 const PORT = 3001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
