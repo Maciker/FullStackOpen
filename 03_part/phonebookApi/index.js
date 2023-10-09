@@ -58,6 +58,15 @@ app.delete(baseApiUrl + '/:id', (request, response) => {
     response.status(204).end()
 })
 
+app.post(baseApiUrl, (request, response) => {
+    const id = Math.max(...persons.map(person => person.id)) + 1
+
+    const person = request.body
+    person.id = id
+
+    respon.json(person)
+})
+
 const PORT = 6001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
