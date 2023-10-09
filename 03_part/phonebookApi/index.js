@@ -64,7 +64,7 @@ app.post(baseApiUrl, (request, response) => {
     const person = request.body
     person.id = id
 
-    respon.json(person)
+    response.json(person)
 })
 
 const PORT = 6001
