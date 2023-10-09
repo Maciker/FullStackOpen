@@ -1,0 +1,14 @@
+GET http://localhost:6001/api/persons
+
+###
+GET http://localhost:6001/api/persons/1
+
+###
+POST http://localhost:6001/api/persons
+Content-Type: application/json
+
+    {
+        "id": 1,
+        "name": "Iker Macaya",
+        "number": "123456789"
+    }
