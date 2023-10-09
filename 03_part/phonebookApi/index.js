@@ -3,6 +3,8 @@ const app = express()
 
 app.use(express.json())
 
+const baseApiUrl = '/api/persons'
+
 let persons = [
     {
         "id": 1,
@@ -30,7 +32,7 @@ app.get('/', (request, response) => {
     response.send(`<h1> The PhoneBook Api </h1>`)
 })
 
-app.get('/api/persons', (request, response) => {
+app.get(baseApiUrl, (request, response) => {
     response.json(persons)
 })
 
@@ -38,7 +40,7 @@ app.get('/info', (request, response) => {
     response.send(`<h3> The phone Book has info for ${persons.length} people`)
 })
 
-app.get('/api/persons/:id', (request, response) => {
+app.get(baseApiUrl + '/:id', (request, response) => {
     const id = Number(request.params.id)
     const person = persons.find(person => person.id === id)
 
@@ -49,7 +51,7 @@ app.get('/api/persons/:id', (request, response) => {
     }
 })
 
-app.delete('/api/persons/:id', (request, response) => {
+app.delete(baseApiUrl + '/:id', (request, response) => {
     const id = Number(request.params.id)
     persons = persons.filter( person => person.id !== id)
 
