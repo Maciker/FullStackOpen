@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 
+app.use(express.json())
+
 let courses = [
     {
         name: 'Half Stack application development',
@@ -64,11 +66,18 @@ app.get('/api/courses/:id', (request, response) => {
     }
 })
 
-app.get('/api/courses/:id', (request, response) => {
+app.delete('/api/courses/:id', (request, response) => {
     const id = Number(request.params.id)
     courses = courses.filter(course => course.id !== id)
 
     response.status(204).end()
+})
+
+app.post('/api/courses', (request, response) => {
+    const id = Math.max(...courses.map( quote => quote.id)) + 1
+    const course = request.body
+    course.id = id
+    response.json(course)
 })
 
 const PORT = 3001
