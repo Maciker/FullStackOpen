@@ -58,11 +58,26 @@ app.delete(baseApiUrl + '/:id', (request, response) => {
     response.status(204).end()
 })
 
-app.post(baseApiUrl, (request, response) => {
-    const id = Math.max(...persons.map(person => person.id)) + 1
+const requestPersonHandler = (request, response, value) => {
+    if(request.body[value]) {
+        return request.body[value]
+    } else {
+        return response.status(400).json({
+            error: `${value} missing`
+        })
+    }
+}
 
-    const person = request.body
-    person.id = id
+const generateId = () => {
+    return Math.max(...persons.map(person => person.id)) + 1
+}
+
+app.post(baseApiUrl, (request, response) => {
+    const person =     {
+        id: generateId(),
+        name: requestPersonHandler(request, response, 'name'),
+        number: requestPersonHandler(request, response, 'number')
+    }
 
     response.json(person)
 })
