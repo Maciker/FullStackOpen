@@ -79,6 +79,8 @@ app.post(baseApiUrl, (request, response) => {
         number: requestPersonHandler(request, response, 'number')
     }
 
+    persons = persons.concat(person)
+
     response.json(person)
 })
 
