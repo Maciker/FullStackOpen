@@ -3,6 +3,10 @@ const app = express()
 
 app.use(express.json())
 
+const unknownEndpoint = (request, response) => {
+    response.status(404).send({ error: 'unknown endpoint' })
+}
+
 let courses = [
     {
         name: 'Half Stack application development',
@@ -98,6 +102,8 @@ app.post('/api/courses', (request, response) => {
 
     response.json(course)
 })
+
+app.use(unknownEndpoint)
 
 const PORT = 3001
 app.listen(PORT, () => {
