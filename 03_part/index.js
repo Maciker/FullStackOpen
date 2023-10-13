@@ -73,10 +73,29 @@ app.delete('/api/courses/:id', (request, response) => {
     response.status(204).end()
 })
 
+const requestCourseHandler = (request, response, value) => {
+    if(request.body[value]) {
+        return request.body[value]
+    } else {
+        return response.status(400).json({
+            error: `${value} missing`
+        })
+    }
+}
+
+const generateId = () => {
+    return Math.max(...courses.map(person => person.id)) + 1
+}
+
 app.post('/api/courses', (request, response) => {
-    const id = Math.max(...courses.map( quote => quote.id)) + 1
-    const course = request.body
-    course.id = id
+    const course = {
+        id: generateId(),
+        name: requestCourseHandler(request, response, 'name'),
+        parts: []
+    }
+
+    courses = courses.concat(course)
+
     response.json(course)
 })
 
