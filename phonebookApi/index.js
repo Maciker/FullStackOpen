@@ -1,5 +1,5 @@
 const express = require('express')
-require('dotenv').config()
+const {personsData} = require('./data/personsData')
 const morgan = require('morgan')
 const cors = require('cors')
 const app = express()
@@ -14,28 +14,7 @@ const unknownEndpoint = (request, response) => {
 
 const baseApiUrl = '/api/persons'
 
-let persons = [
-    {
-        "id": 1,
-        "name": "Arto Hellas",
-        "number": "040-123456"
-    },
-    {
-        "id": 2,
-        "name": "Ada Lovelace",
-        "number": "39-44-5323523"
-    },
-    {
-        "id": 3,
-        "name": "Dan Abramov",
-        "number": "12-43-234345"
-    },
-    {
-        "id": 4,
-        "name": "Mary Poppendieck",
-        "number": "39-23-6423122"
-    }
-]
+let persons = personsData()
 
 app.get('/', (request, response) => {
     response.send(`<h1> The PhoneBook Api </h1>`)
