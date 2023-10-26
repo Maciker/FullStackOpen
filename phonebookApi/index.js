@@ -1,8 +1,22 @@
 const express = require('express')
-const {personsData} = require('./data/personsData')
+const mongoose = require('mongoose').default
+require('dotenv').config()
 const morgan = require('morgan')
 const cors = require('cors')
+const {response} = require("express");
 const app = express()
+
+mongoose.connect(process.env.MONGODB_URI)
+    .then((result) => console.log('Connected to DB'))
+    .catch((error) => console.log(error))
+
+const usersSchema = new mongoose.Schema({
+    id: Number,
+    name: String,
+    number: String
+})
+
+const User = mongoose.model('User', usersSchema)
 
 app.use(cors())
 app.use(express.json())
@@ -12,16 +26,70 @@ const unknownEndpoint = (request, response) => {
     response.status(404).send({ error: 'unknown endpoint' })
 }
 
-const baseApiUrl = '/api/persons'
+const baseApiUrl = '/api/users'
 
-let persons = personsData()
+let persons = [
+    {
+        "id": 1,
+        "name": "Arto Hellas",
+        "number": "040-123456"
+    },
+    {
+        "id": 2,
+        "name": "Ada Lovelace",
+        "number": "39-44-5323523"
+    },
+    {
+        "id": 3,
+        "name": "Dan Abramov",
+        "number": "12-43-234345"
+    },
+    {
+        "id": 4,
+        "name": "Mary Poppendieck",
+        "number": "39-23-6423122"
+    }
+]
 
 app.get('/', (request, response) => {
     response.send(`<h1> The PhoneBook Api </h1>`)
 })
 
+/*app.get('/add-persons', (request, response) => {
+    const data = [
+        {
+            "id": 1,
+            "name": "Arto Hellas",
+            "number": "040-123456"
+        },
+        {
+            "id": 2,
+            "name": "Ada Lovelace",
+            "number": "39-44-5323523"
+        },
+        {
+            "id": 3,
+            "name": "Dan Abramov",
+            "number": "12-43-234345"
+        },
+        {
+            "id": 4,
+            "name": "Mary Poppendieck",
+            "number": "39-23-6423122"
+        }
+    ]
+
+    data.map( person => {
+        personToAdd = new User(person)
+        personToAdd.save().then( (result) => {
+            response.send(result)
+        }).catch( (error) => console.log(error))
+    })
+})*/
 app.get(baseApiUrl, (request, response) => {
-    response.json(persons)
+    User.find({}).then(users => {
+        response.json(users)
+    })
 })
 
 app.get('/info', (request, response) => {
